@@ -10,6 +10,8 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+
 
 interface ItemData {
   gender: string;
@@ -31,9 +33,10 @@ interface Name {
 })
 export class CourseComponent implements OnInit, OnDestroy {
   ds = new MyDataSource(this.http);
-  visible = true;
+  visible = false;
+  drawerTitle = "Create";
   private destroy$ = new Subject();
-  constructor(private http: HttpClient, private nzMessage: NzMessageService) {}
+  constructor(private http: HttpClient, private nzMessage: NzMessageService, private modal: NzModalService) {}
 
   ngOnInit(): void {
     this.ds
@@ -50,6 +53,8 @@ export class CourseComponent implements OnInit, OnDestroy {
 
   edit(item: any) {
     console.log(item);
+    this.visible = true;
+    this.drawerTitle = "Edit";
   }
 
   delete(item: any) {
@@ -58,10 +63,19 @@ export class CourseComponent implements OnInit, OnDestroy {
 
   open(): void {
     this.visible = true;
+    this.drawerTitle = "Create";
   }
 
   close(): void {
     this.visible = false;
+  }
+
+  showConfirm(item:any): void {
+    this.modal.confirm({
+      nzTitle: '<i>Do you Want to delete these items?</i>',
+      nzContent: '<b>Some descriptions</b>',
+      nzOnOk: () => console.log('OK')
+    });
   }
 }
 class MyDataSource extends DataSource<ItemData> {

@@ -15,6 +15,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
     NzInputModule,
     NzInputNumberModule,
     NzDatePickerModule,
-    NzTabsModule
+    NzTabsModule,
+    NzModalModule
   ],
 })
 export class CourseModule {}

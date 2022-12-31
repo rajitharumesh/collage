@@ -11,20 +11,9 @@ import { catchError, takeUntil } from 'rxjs/operators';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { CourseService } from './course.service';
+import { CourseService, ItemData } from './course.service';
 
 
-interface ItemData {
-  gender: string;
-  name: Name;
-  email: string;
-}
-
-interface Name {
-  title: string;
-  first: string;
-  last: string;
-}
 
 @Component({
   selector: 'app-course',
@@ -35,10 +24,14 @@ interface Name {
 export class CourseComponent implements OnInit, OnDestroy {
   ds = new MyDataSource(this.http);
   visible = false;
-  drawerTitle = "Create";
+  drawerTitle = 'Create';
   private destroy$ = new Subject();
-  constructor(private http: HttpClient, private nzMessage: NzMessageService, 
-    private modal: NzModalService, private courseService:CourseService) {}
+  constructor(
+    private http: HttpClient,
+    private nzMessage: NzMessageService,
+    private modal: NzModalService,
+    private courseService: CourseService
+  ) {}
 
   ngOnInit(): void {
     this.ds
@@ -56,7 +49,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   edit(item: any) {
     console.log(item);
     this.visible = true;
-    this.drawerTitle = "Edit";
+    this.drawerTitle = 'Edit';
   }
 
   delete(item: any) {
@@ -65,18 +58,18 @@ export class CourseComponent implements OnInit, OnDestroy {
 
   open(): void {
     this.visible = true;
-    this.drawerTitle = "Create";
+    this.drawerTitle = 'Create';
   }
 
   close(): void {
     this.visible = false;
   }
 
-  showConfirm(item:any): void {
+  showConfirm(item: any): void {
     this.modal.confirm({
       nzTitle: '<i>Do you Want to delete these items?</i>',
       nzContent: '<b>Some descriptions</b>',
-      nzOnOk: () => console.log('OK')
+      nzOnOk: () => console.log('OK'),
     });
   }
 }

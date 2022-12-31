@@ -15,18 +15,19 @@ export interface ItemData {
   email: string;
 }
 
-export interface Course {
+export interface Student {
   id: string;
   name: string;
-  college: string;
-  address: string;
+  birthDay: Date;
+  registrationNo: string;
 }
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class CourseService {
-  apiUrl: string = environment.apiURL+"/course";
+export class StudentService {
+  apiUrl: string = environment.apiURL+"/student";
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) {}
   // Create

@@ -11,6 +11,7 @@ import { catchError, takeUntil } from 'rxjs/operators';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { CourseService } from './course.service';
 
 
 interface ItemData {
@@ -36,7 +37,8 @@ export class CourseComponent implements OnInit, OnDestroy {
   visible = false;
   drawerTitle = "Create";
   private destroy$ = new Subject();
-  constructor(private http: HttpClient, private nzMessage: NzMessageService, private modal: NzModalService) {}
+  constructor(private http: HttpClient, private nzMessage: NzMessageService, 
+    private modal: NzModalService, private courseService:CourseService) {}
 
   ngOnInit(): void {
     this.ds

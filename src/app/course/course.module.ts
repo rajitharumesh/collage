@@ -16,6 +16,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { CourseService } from './course.service';
 
 
 @NgModule({
@@ -35,5 +36,6 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzTabsModule,
     NzModalModule
   ],
+  providers:[CourseService]
 })
 export class CourseModule {}

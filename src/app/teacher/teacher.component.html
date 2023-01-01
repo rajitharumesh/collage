@@ -1,128 +1,100 @@
 <p>teacher works!</p>
 <div>
-    <div class="card-container">
-      <button nz-button nzType="primary" (click)="open()">Create</button>
-    </div>
-    <div class="card-container">
-      <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
-        <div>
-          <cdk-virtual-scroll-viewport
-            itemSize="73"
-            class="demo-infinite-container"
-          >
-            <nz-list>
-              <nz-list-item *cdkVirtualFor="let item of ds">
-                <nz-list-item-meta
-                  *ngIf="item"
-                  nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                  [nzDescription]="item.email"
-                >
-                </nz-list-item-meta>
-                <ul nz-list-item-actions>
-                  <nz-list-item-action
-                    ><a (click)="edit(item)">Edit</a></nz-list-item-action
-                  >
-                  <nz-list-item-action
-                    ><a (click)="delete(item)">Delete</a></nz-list-item-action
-                  >
-                </ul>
-              </nz-list-item>
-            </nz-list>
-          </cdk-virtual-scroll-viewport>
-        </div>
-      </cdk-virtual-scroll-viewport>
-    </div>
+  <div class="card-container">
+    <button nz-button nzType="primary" (click)="open()">Create</button>
   </div>
-  
-  <!--Create/Edit Drawer-->
-  <nz-drawer
-    [nzBodyStyle]="{ overflow: 'auto' }"
-    [nzMaskClosable]="false"
-    [nzWidth]="720"
-    [nzVisible]="visible"
-    [nzTitle]="drawerTitle"
-    [nzFooter]="footerTpl"
-    (nzOnClose)="close()"
-  >
-    <form nz-form *nzDrawerContent>
-      <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label>Name</nz-form-label>
-            <nz-form-control>
-              <input nz-input placeholder="please enter user name" />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label>Url</nz-form-label>
-            <nz-form-control>
-              <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
-                <input type="text" nz-input placeholder="please enter url" />
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
+  <div class="card-container">
+    <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
+      <div>
+        <cdk-virtual-scroll-viewport
+          itemSize="73"
+          class="demo-infinite-container"
+        >
+          <nz-list>
+            <nz-list-item *cdkVirtualFor="let item of ds">
+              <nz-list-item-meta
+                *ngIf="item"
+                nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                [nzDescription]="item.email"
+              >
+              </nz-list-item-meta>
+              <ul nz-list-item-actions>
+                <nz-list-item-action
+                  ><a (click)="edit(item)">Edit</a></nz-list-item-action
+                >
+                <nz-list-item-action
+                  ><a (click)="delete(item)">Delete</a></nz-list-item-action
+                >
+              </ul>
+            </nz-list-item>
+          </nz-list>
+        </cdk-virtual-scroll-viewport>
       </div>
-      <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label>Owner</nz-form-label>
-            <nz-form-control>
-              <nz-select nzPlaceHolder="Please select an owner"></nz-select>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label>Type</nz-form-label>
-            <nz-form-control>
-              <nz-select nzPlaceHolder="Please choose the type"></nz-select>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</div>
+
+<!--Create/Edit Drawer-->
+<nz-drawer
+  [nzBodyStyle]="{ overflow: 'auto' }"
+  [nzMaskClosable]="false"
+  [nzWidth]="720"
+  [nzVisible]="visible"
+  [nzTitle]="drawerTitle"
+  [nzFooter]="footerTpl"
+  (nzOnClose)="close()"
+>
+  <form nz-form [formGroup]="form" *nzDrawerContent>
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Name</nz-form-label>
+          <nz-form-control>
+            <input
+              formControlName="name"
+              nz-input
+              placeholder="Please Enter Student Name"
+            />
+          </nz-form-control>
+        </nz-form-item>
       </div>
-      <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label>Approver</nz-form-label>
-            <nz-form-control>
-              <nz-select nzPlaceHolder="Please choose the approver"></nz-select>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label>DateTime</nz-form-label>
-            <nz-form-control>
-              <nz-range-picker></nz-range-picker>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Birth Day</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker formControlName="birthDay"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
       </div>
-      <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="24">
-          <nz-form-item>
-            <nz-form-label>Description</nz-form-label>
-            <nz-form-control>
-              <textarea
-                nz-input
-                placeholder="please enter url description"
-                [nzAutosize]="{ minRows: 4, maxRows: 4 }"
-              ></textarea>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Salary</nz-form-label>
+          <nz-form-control>
+            <input
+              formControlName="salary"
+              nz-input
+              placeholder="Please Enter Salary"
+            />
+          </nz-form-control>
+        </nz-form-item>
       </div>
-    </form>
-  
-    <ng-template #footerTpl>
-      <div style="float: right">
-        <button nz-button style="margin-right: 8px" (click)="close()">
-          Cancel
-        </button>
-        <button nz-button nzType="primary" (click)="close()">Submit</button>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label></nz-form-label>
+          <nz-form-control> </nz-form-control>
+        </nz-form-item>
       </div>
-    </ng-template>
-  </nz-drawer>
+    </div>
+  </form>
+
+  <ng-template #footerTpl>
+    <div style="float: right">
+      <button nz-button style="margin-right: 8px" (click)="close()">
+        Cancel
+      </button>
+      <button nz-button nzType="primary" (click)="submitForm()">Submit</button>
+    </div>
+  </ng-template>
+</nz-drawer>

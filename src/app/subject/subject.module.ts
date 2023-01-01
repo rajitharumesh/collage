@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SubjectRoutingModule } from './subject-routing.module';
 import { SubjectComponent } from './subject.component';
@@ -34,7 +35,7 @@ import { SubjectService } from './subject.service';
     NzInputNumberModule,
     NzDatePickerModule,
     NzTabsModule,
-    NzModalModule,
+    NzModalModule,FormsModule, ReactiveFormsModule
   ],
   providers: [SubjectService],
 })

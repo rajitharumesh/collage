@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { TeacherComponent } from './teacher.component';
@@ -37,7 +38,7 @@ import { TeacherService } from './teacher.service';
     NzInputNumberModule,
     NzDatePickerModule,
     NzTabsModule,
-    NzModalModule,
+    NzModalModule,FormsModule, ReactiveFormsModule
   ],
   providers: [TeacherService],
 })

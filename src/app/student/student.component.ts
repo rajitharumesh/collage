@@ -11,6 +11,8 @@ import { catchError, takeUntil } from 'rxjs/operators';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+
 import { StudentService, ItemData } from './student.service';
 
 @Component({
@@ -24,11 +26,13 @@ export class StudentComponent implements OnInit, OnDestroy {
   visible = false;
   drawerTitle = 'Create';
   private destroy$ = new Subject();
+  form !: UntypedFormGroup;
+
   constructor(
     private http: HttpClient,
     private nzMessage: NzMessageService,
     private modal: NzModalService,
-    private studentService: StudentService
+    private studentService: StudentService, private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +42,13 @@ export class StudentComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.nzMessage.warning('Infinite List loaded all');
       });
+      this.form = this.fb.group({
+        name: [null, [Validators.required]],
+        description: [null, [Validators.required]],
+        birthDay: [null, [Validators.required]],
+        registrationNo: [null, [Validators.required]],
+      });
+      
   }
 
   ngOnDestroy(): void {
@@ -61,6 +72,20 @@ export class StudentComponent implements OnInit, OnDestroy {
 
   close(): void {
     this.visible = false;
+  }
+
+  submitForm(): void {
+    if (this.form.valid) {
+      console.log('submit', this.form.value);
+      this.studentService.create(this.form.value);
+    } else {
+      Object.values(this.form.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   showConfirm(item: any): void {

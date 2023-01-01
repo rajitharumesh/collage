@@ -11,9 +11,14 @@ import { catchError, takeUntil } from 'rxjs/operators';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+
 import { CourseService, ItemData } from './course.service';
-
-
 
 @Component({
   selector: 'app-course',
@@ -26,11 +31,13 @@ export class CourseComponent implements OnInit, OnDestroy {
   visible = false;
   drawerTitle = 'Create';
   private destroy$ = new Subject();
+  form!: UntypedFormGroup;
   constructor(
     private http: HttpClient,
     private nzMessage: NzMessageService,
     private modal: NzModalService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +47,11 @@ export class CourseComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.nzMessage.warning('Infinite List loaded all');
       });
+
+    this.form = this.fb.group({
+      name: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+    });
   }
 
   ngOnDestroy(): void {
@@ -50,6 +62,7 @@ export class CourseComponent implements OnInit, OnDestroy {
     console.log(item);
     this.visible = true;
     this.drawerTitle = 'Edit';
+    this.form.setValue({'name':"ABC Edit",'description':"DESC" })
   }
 
   delete(item: any) {
@@ -57,12 +70,29 @@ export class CourseComponent implements OnInit, OnDestroy {
   }
 
   open(): void {
+    this.form.setValue({'name':"ABC",'description':"DESC" });
     this.visible = true;
     this.drawerTitle = 'Create';
+    console.log('open');
   }
 
   close(): void {
     this.visible = false;
+    console.log('close');
+  }
+
+  submitForm(): void {
+    if (this.form.valid) {
+      console.log('submit', this.form.value);
+      this.courseService.create(this.form.value);
+    } else {
+      Object.values(this.form.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   showConfirm(item: any): void {

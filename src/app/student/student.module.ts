@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { NzListModule } from 'ng-zorro-antd/list';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -37,7 +39,7 @@ import { StudentComponent } from './student.component';
     NzInputNumberModule,
     NzDatePickerModule,
     NzTabsModule,
-    NzModalModule
+    NzModalModule,FormsModule, ReactiveFormsModule
   ],
   providers:[StudentService]
 })

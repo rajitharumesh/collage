@@ -52,7 +52,7 @@ export class TeacherComponent implements OnInit, OnDestroy {
     console.log(item);
     this.visible = true;
     this.drawerTitle = 'Edit';
-    this.form.setValue({ 'id': item.id, 'firstName': item.firstName, 'lastName': item.lastName, 'salary': item.salary })
+    this.form.setValue({ 'id': item.id, 'firstName': item.firstName, 'lastName': item.lastName, 'salary': item.salary, "birthDate": item.birthDate })
   }
 
   delete(item: any) {

@@ -17,8 +17,9 @@ export interface ItemData {
 
 export interface Teacher {
   id: string;
-  name: string;
-  birthDay: Date;
+  firstName: string;
+  lastName: string;
+  birthDate:Date,
   salary: number;
 }
 
@@ -37,8 +38,9 @@ export class TeacherService {
   }
   // Read
   show() {
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get(this.apiUrl);
   }
+  
   // Update
   update(id: any, data: any): Observable<any> {
     let API_URL = `${this.apiUrl}/${id}`;

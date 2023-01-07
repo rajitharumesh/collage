@@ -2,10 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { TeacherRoutingModule } from './teacher-routing.module';
-import { TeacherComponent } from './teacher.component';
-
-
 import { NzListModule } from 'ng-zorro-antd/list';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -19,6 +15,14 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzButtonModule  } from 'ng-zorro-antd/button';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+
+import { TeacherRoutingModule } from './teacher-routing.module';
+import { TeacherComponent } from './teacher.component';
 import { TeacherService } from './teacher.service';
 
 @NgModule({
@@ -38,7 +42,13 @@ import { TeacherService } from './teacher.service';
     NzInputNumberModule,
     NzDatePickerModule,
     NzTabsModule,
-    NzModalModule,FormsModule, ReactiveFormsModule
+    NzModalModule,
+    NzSkeletonModule,
+    NzButtonModule,
+    NzTableModule,
+    NzDividerModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [TeacherService],
 })

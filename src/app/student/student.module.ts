@@ -16,8 +16,13 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { StudentService } from './student.service';
 
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzButtonModule  } from 'ng-zorro-antd/button';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+
+import { StudentService } from './student.service';
 import { StudentRoutingModule } from './student-routing.module';
 import { StudentComponent } from './student.component';
 
@@ -39,7 +44,13 @@ import { StudentComponent } from './student.component';
     NzInputNumberModule,
     NzDatePickerModule,
     NzTabsModule,
-    NzModalModule,FormsModule, ReactiveFormsModule
+    NzModalModule,
+    NzSkeletonModule,
+    NzButtonModule,
+    NzTableModule,
+    NzDividerModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers:[StudentService]
 })

@@ -16,9 +16,9 @@ export interface ItemData {
 }
 
 export interface Course {
-  id: string;
-  name: string;
-  college: string;
+  id: number;
+  title: string;
+  description: string;
   address: string;
 }
 
@@ -46,7 +46,7 @@ export class CourseService {
       .pipe(catchError(this.error));
   }
   // Delete
-  delete(id: any): Observable<any> {
+  delete(id: number): Observable<any> {
     var API_URL = `${this.apiUrl}/${id}`;
     return this.http.delete(API_URL).pipe(catchError(this.error));
   }

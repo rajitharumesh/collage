@@ -1,49 +1,37 @@
-<p>course works!</p>
 <div>
   <div class="card-container">
     <button nz-button nzType="primary" (click)="open()">Create</button>
   </div>
-  <div class="card-container">
-    <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
-      <div>
-        <cdk-virtual-scroll-viewport
-          itemSize="73"
-          class="demo-infinite-container"
-        >
-          <nz-list>
-            <nz-list-item *cdkVirtualFor="let item of ds">
-              <nz-list-item-meta
-                *ngIf="item"
-                nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                [nzDescription]="item.email"
-              >
-              </nz-list-item-meta>
-              <ul nz-list-item-actions>
-                <nz-list-item-action
-                  ><a (click)="edit(item)">Edit</a></nz-list-item-action
-                >
-                <nz-list-item-action
-                  ><a (click)="delete(item)">Delete</a></nz-list-item-action
-                >
-              </ul>
-            </nz-list-item>
-          </nz-list>
-        </cdk-virtual-scroll-viewport>
-      </div>
-    </cdk-virtual-scroll-viewport>
+  <div class="card-container" >
+    <nz-table #basicTable [nzData]="list" [nzLoading]="initLoading">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{data.id}}</td>
+          <td>{{data.title}}</td>
+          <td>{{data.description}}</td>
+          <td>
+            <a (click)="edit(data)">Edit</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a (click)="showConfirm(data)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
   </div>
 </div>
 
+
 <!--Create/Edit Drawer-->
-<nz-drawer
-  [nzBodyStyle]="{ overflow: 'auto' }"
-  [nzMaskClosable]="false"
-  [nzWidth]="720"
-  [nzVisible]="visible"
-  [nzTitle]="drawerTitle"
-  [nzFooter]="footerTpl"
-  (nzOnClose)="close()"
->
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible"
+  [nzTitle]="drawerTitle" [nzFooter]="footerTpl" (nzOnClose)="close()">
   <form nz-form [formGroup]="form" *nzDrawerContent>
     <div nz-row [nzGutter]="8">
       <div nz-col nzSpan="12">
@@ -70,7 +58,7 @@
       <button nz-button style="margin-right: 8px" (click)="close()">
         Cancel
       </button>
-      <button nz-button nzType="primary" (click)="submitForm()">Submit</button>
+      <button nz-button nzType="primary" (click)="submitForm()">Save</button>
     </div>
   </ng-template>
 </nz-drawer>

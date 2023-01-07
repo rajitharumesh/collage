@@ -10,6 +10,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Subject, SubjectService } from './subject.service';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-subject',
@@ -31,7 +32,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
     private nzMessage: NzMessageService,
     private modal: NzModalService,
     private subjectService: SubjectService,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,private sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
@@ -117,7 +118,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
   //-------------------------------------------------------------------
 
   getData(): void {
-    this.subjectService.show()
+    this.sharedService.getSubject()
       .subscribe((data: any) => {
         this.data = data;
         this.list = data;

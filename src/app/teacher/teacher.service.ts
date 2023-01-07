@@ -36,11 +36,6 @@ export class TeacherService {
   create(data: any): Observable<any> {
     return this.http.post(this.apiUrl, data).pipe(catchError(this.error));
   }
-
-  // Read
-  show() {
-    return this.http.get(this.apiUrl);
-  }
   
   // Update
   update(data: any): Observable<any> {

@@ -24,6 +24,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { TeacherComponent } from './teacher.component';
 import { TeacherService } from './teacher.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TeacherService } from './teacher.service';
     NzTableModule,
     NzDividerModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [TeacherService],
 })

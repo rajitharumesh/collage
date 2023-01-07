@@ -25,6 +25,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { CourseService } from './course.service';
 import { CourseRoutingModule } from './course-routing.module';
 import { CourseComponent } from './course.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { CourseComponent } from './course.component';
     NzTableModule,
     NzDividerModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers:[CourseService]
 })

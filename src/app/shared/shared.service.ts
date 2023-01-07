@@ -25,29 +25,34 @@ export interface Subject {
 @Injectable({
   providedIn: 'root',
 })
-export class SubjectService {
-  apiUrl: string = environment.apiURL+"/subject";
+export class SharedService {
+  apiUrl: string = environment.apiURL;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private http: HttpClient) {}
-  
-  // Create
-  create(data: any): Observable<any> {
-    // return this.http.post(API_URL, data).pipe(catchError(this.error));
-    return this.http.post(this.apiUrl, data).pipe(catchError(this.error));
-  }
-  
-  // Update
-  update(data: any): Observable<any> {
-    return this.http.put(this.apiUrl, data).pipe(catchError(this.error));
+  constructor(private http: HttpClient) { }
+
+
+  // Read
+  getSubject() {
+    return this.http.get(this.apiUrl+ "/subject");
   }
 
-  // Delete
-  delete(id: any): Observable<any> {
-    var API_URL = `${this.apiUrl}/${id}`;
-    return this.http.delete(API_URL).pipe(catchError(this.error));
+  // Read
+  getCourse() {
+    return this.http.get(this.apiUrl + "/course");
   }
-  
+
+  // Read
+  getStudent() {
+    return this.http.get(this.apiUrl + "/student");
+  }
+
+  // Read
+  getTeacher() {
+    return this.http.get(this.apiUrl + "/teacher");
+  }
+
+
   // Handle Errors
   error(error: HttpErrorResponse) {
     let errorMessage = '';

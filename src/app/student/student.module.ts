@@ -25,11 +25,14 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { StudentService } from './student.service';
 import { StudentRoutingModule } from './student-routing.module';
 import { StudentComponent } from './student.component';
+import { SettingComponent } from './setting/setting.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    StudentComponent
+    StudentComponent,
+    SettingComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +53,8 @@ import { StudentComponent } from './student.component';
     NzTableModule,
     NzDividerModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers:[StudentService]
 })

@@ -24,9 +24,11 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { SubjectService } from './subject.service';
 import { SubjectRoutingModule } from './subject-routing.module';
 import { SubjectComponent } from './subject.component';
+import { SettingComponent } from './setting/setting.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [SubjectComponent],
+  declarations: [SubjectComponent, SettingComponent],
   imports: [
     CommonModule,
     SubjectRoutingModule,
@@ -46,7 +48,8 @@ import { SubjectComponent } from './subject.component';
     NzTableModule,
     NzDividerModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [SubjectService],
 })

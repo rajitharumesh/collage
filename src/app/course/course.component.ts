@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 
 import { Course, CourseService } from './course.service';
+import { SharedService } from '../shared/shared.service';
 
 const count = 5;
 
@@ -36,7 +37,8 @@ export class CourseComponent implements OnInit, OnDestroy {
     private nzMessage: NzMessageService,
     private modal: NzModalService,
     private courseService: CourseService,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,
+    private sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
@@ -122,7 +124,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   //-------------------------------------------------------------------
 
   getData(): void {
-    this.courseService.show()
+    this.sharedService.getCourse()
       .subscribe((data: any) => {
         this.data = data;
         this.list = data;

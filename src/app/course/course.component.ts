@@ -12,13 +12,14 @@ import { catchError, takeUntil } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import {
+  FormGroup,
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 
-import { CourseService, ItemData } from './course.service';
+import { Course, CourseService, ItemData } from './course.service';
 
 @Component({
   selector: 'app-course',
@@ -31,14 +32,14 @@ export class CourseComponent implements OnInit, OnDestroy {
   visible = false;
   drawerTitle = 'Create';
   private destroy$ = new Subject();
-  form!: UntypedFormGroup;
+  form!: FormGroup;
   constructor(
     private http: HttpClient,
     private nzMessage: NzMessageService,
     private modal: NzModalService,
     private courseService: CourseService,
     private fb: UntypedFormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.ds
@@ -49,8 +50,8 @@ export class CourseComponent implements OnInit, OnDestroy {
       });
 
     this.form = this.fb.group({
-      name: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      title: ["", [Validators.required]],
+      description: ["", [Validators.required]],
     });
   }
 
@@ -62,18 +63,32 @@ export class CourseComponent implements OnInit, OnDestroy {
     console.log(item);
     this.visible = true;
     this.drawerTitle = 'Edit';
-    this.form.setValue({'name':"ABC Edit",'description':"DESC" })
+    this.form.setValue({ 'title': "ABC Edit", 'description': "DESC" })
   }
 
   delete(item: any) {
     console.log(item);
   }
 
-  open(): void {
-    this.form.setValue({'name':"ABC",'description':"DESC" });
+  async open(): Promise<void> {
+    this.form.setValue({ 'title': "ABC", 'description': "DESC" });
     this.visible = true;
     this.drawerTitle = 'Create';
     console.log('open');
+
+    this.courseService.show()
+      .subscribe((data: any) => {
+        console.log("aa", data)
+        this.form.controls['title'].setValue(data[0].title),
+        this.form.controls['description'].setValue(data[0].description)
+      }, error => console.error(error));
+
+    // this.config = {
+    //     demoUrl: data['demoUrl'],
+    //     filename:  data['filename']
+    // }
+    // );
+
   }
 
   close(): void {

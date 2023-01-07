@@ -36,7 +36,7 @@ export class CourseService {
   }
   // Read
   show() {
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get(this.apiUrl);
   }
   // Update
   update(id: any, data: any): Observable<any> {

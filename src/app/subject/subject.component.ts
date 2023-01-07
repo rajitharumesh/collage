@@ -62,6 +62,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
         this.nzMessage.success("Successfully Deleted...!");
 
       }, error => this.nzMessage.error("Delete Failed...!"));
+      this.getData();
   }
 
   async open(): Promise<void> {
@@ -80,7 +81,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
       console.log('submit', this.form.value);
 
       if (this.form.value.id) {
-        this.subjectService.update(this.form.value.id, this.form.value).subscribe((data: any) => {
+        this.subjectService.update(this.form.value).subscribe((data: any) => {
           console.log("Update  - ", data);
           this.nzMessage.success("Successfully Updated...!");
 
@@ -101,6 +102,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
         }
       });
     }
+    this.getData();
   }
 
   showConfirm(item: any): void {

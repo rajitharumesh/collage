@@ -31,8 +31,8 @@ export class SubjectService {
   constructor(private http: HttpClient) {}
   // Create
   create(data: any): Observable<any> {
-    let API_URL = `${this.apiUrl}`;
-    return this.http.post(API_URL, data).pipe(catchError(this.error));
+    // return this.http.post(API_URL, data).pipe(catchError(this.error));
+    return this.http.post(this.apiUrl, data).pipe(catchError(this.error));
   }
   // Read
   show() {
@@ -40,11 +40,8 @@ export class SubjectService {
   }
   
   // Update
-  update(id: any, data: any): Observable<any> {
-    let API_URL = `${this.apiUrl}/${id}`;
-    return this.http
-      .put(API_URL, data, { headers: this.headers })
-      .pipe(catchError(this.error));
+  update(data: any): Observable<any> {
+    return this.http.put(this.apiUrl, data).pipe(catchError(this.error));
   }
   // Delete
   delete(id: any): Observable<any> {

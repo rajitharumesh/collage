@@ -28,7 +28,9 @@ export interface Subject {
 export class SubjectService {
   apiUrl: string = environment.apiURL+"/subject";
   headers = new HttpHeaders().set('Content-Type', 'application/json');
+
   constructor(private http: HttpClient) {}
+  
   // Create
   create(data: any): Observable<any> {
     // return this.http.post(API_URL, data).pipe(catchError(this.error));
@@ -43,11 +45,13 @@ export class SubjectService {
   update(data: any): Observable<any> {
     return this.http.put(this.apiUrl, data).pipe(catchError(this.error));
   }
+
   // Delete
   delete(id: any): Observable<any> {
     var API_URL = `${this.apiUrl}/${id}`;
     return this.http.delete(API_URL).pipe(catchError(this.error));
   }
+  
   // Handle Errors
   error(error: HttpErrorResponse) {
     let errorMessage = '';

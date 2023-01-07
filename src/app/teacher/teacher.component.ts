@@ -9,8 +9,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
-import { Teacher, TeacherService } from './teacher.service';
-import { SharedService } from '../shared/shared.service';
+import { TeacherService } from './teacher.service';
+import { SharedService, Teacher } from '../shared/shared.service';
 
 @Component({
   selector: 'app-teacher',

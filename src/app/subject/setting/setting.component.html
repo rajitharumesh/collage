@@ -1,1 +1,21 @@
 <p>setting works!</p>
+<form nz-form [formGroup]="form">
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Name</nz-form-label>
+          <nz-form-control>
+            <input formControlName="title" nz-input placeholder="Please Enter Course Title" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Description</nz-form-label>
+          <nz-form-control>
+            <input formControlName="description" nz-input placeholder="Please Enter Course Description" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>

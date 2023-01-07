@@ -9,8 +9,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
-import { Subject, SubjectService } from './subject.service';
-import { SharedService } from '../shared/shared.service';
+import { SubjectService } from './subject.service';
+import { SharedService, Subject } from '../shared/shared.service';
 
 @Component({
   selector: 'app-subject',

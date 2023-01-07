@@ -1,1 +1,25 @@
 <p>setting works!</p>
+<form nz-form [formGroup]="form">
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Name</nz-form-label>
+          <nz-form-control>
+            <nz-select [(ngModel)]="selectedCourse" formControlName="course">
+              <nz-option *ngFor="let course of courseList" [nzValue]="course.title" [nzLabel]="course.description"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Description</nz-form-label>
+          <nz-form-control>
+            <nz-select [(ngModel)]="selectedSubject" formControlName="subject">
+              <nz-option *ngFor="let subject of subjectList" [nzValue]="subject.name" [nzLabel]="subject.description"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>

@@ -9,19 +9,6 @@ import {
 
 import { environment } from './../../environments/environment';
 
-export interface ItemData {
-  gender: string;
-  name: string;
-  email: string;
-}
-
-export interface Subject {
-  id: string;
-  name: string;
-  description: number;
-}
-
-
 @Injectable({
   providedIn: 'root',
 })

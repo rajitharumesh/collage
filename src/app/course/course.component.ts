@@ -12,8 +12,8 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { Course, CourseService } from './course.service';
-import { SharedService } from '../shared/shared.service';
+import { CourseService } from './course.service';
+import { Course, SharedService } from '../shared/shared.service';
 
 const count = 5;
 

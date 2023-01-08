@@ -9,6 +9,9 @@
           <th>Id</th>
           <th>Name</th>
           <th>description</th>
+          <th>Course Description</th>
+          <th>Teacher Name</th>
+          <th>Course Title</th>
           <th></th>
         </tr>
       </thead>
@@ -17,6 +20,9 @@
           <td>{{data.id}}</td>
           <td>{{data.name}}</td>
           <td>{{data.description}}</td>
+          <td>{{data.courseDescription}}</td>
+          <td>{{data.teacherName}}</td>
+          <td>{{data.courseTitle}}</td>
           <td>
             <a (click)="edit(data)">Edit</a>
             <nz-divider nzType="vertical"></nz-divider>

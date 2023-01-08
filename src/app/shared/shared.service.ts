@@ -19,7 +19,13 @@ export interface Course {
 export interface Subject {
   id: string;
   name: string;
-  description: number;
+  description: string;
+  courseId:string;
+  subjectId:string;
+  teacherId:string;
+  courseDescription:string;
+  teacherName:string,
+  courseTitle:string;
 }
 
 export interface Student {

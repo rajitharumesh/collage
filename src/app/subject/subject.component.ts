@@ -44,8 +44,8 @@ export class SubjectComponent implements OnInit, OnDestroy {
       id: [null],
       name: ["", [Validators.required]],
       description: ["", [Validators.required]],
-      courseId: ["", [Validators.required]],
-      teacherId: ["", [Validators.required]],
+      courseId: [0, [Validators.required]],
+      teacherId: [0, [Validators.required]],
     });
     this.sharedService.getCourse()
       .subscribe((data: any) => {
@@ -67,7 +67,11 @@ export class SubjectComponent implements OnInit, OnDestroy {
     console.log(item);
     this.visible = true;
     this.drawerTitle = 'Edit';
-    this.form.setValue({ 'id': item.id, 'name': item.name, 'description': item.description });
+    this.form.setValue({ 'id': item.id, 'name': item.name, 'description': item.description,
+    'courseId':item.courseId,'subjectId':item.subjectId,'teacherId':item.teacherId//,
+    // 'courseDescription':item.courseDescription,'teacherName':item.teacherName,'courseTitle':item.courseTitle 
+  
+  });
   }
 
   delete(item: any) {

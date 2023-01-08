@@ -10,7 +10,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { SubjectService } from './subject.service';
-import { SharedService, Subject } from '../shared/shared.service';
+import { Course, SharedService, Subject, Teacher } from '../shared/shared.service';
 
 @Component({
   selector: 'app-subject',
@@ -28,11 +28,14 @@ export class SubjectComponent implements OnInit, OnDestroy {
   data: any[] = [];
   list: Subject[] = [];
 
+  courseList: Course[] = [];
+  teacherList: Teacher[] = [];
+
   constructor(
     private nzMessage: NzMessageService,
     private modal: NzModalService,
     private subjectService: SubjectService,
-    private fb: UntypedFormBuilder,private sharedService:SharedService
+    private fb: UntypedFormBuilder, private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -41,8 +44,20 @@ export class SubjectComponent implements OnInit, OnDestroy {
       id: [null],
       name: ["", [Validators.required]],
       description: ["", [Validators.required]],
+      courseId: ["", [Validators.required]],
+      teacherId: ["", [Validators.required]],
     });
-
+    this.sharedService.getCourse()
+      .subscribe((data: any) => {
+        this.data = data;
+        this.courseList = data;
+        this.initLoading = false;
+      }, error => console.error(error));
+    this.sharedService.getTeacher().subscribe((data: any) => {
+      this.data = data;
+      this.teacherList = data;
+      this.initLoading = false;
+    }, error => console.error(error));
   }
 
   ngOnDestroy(): void {
@@ -52,7 +67,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
     console.log(item);
     this.visible = true;
     this.drawerTitle = 'Edit';
-    this.form.setValue({ 'id':item.id,'name': item.name, 'description': item.description });
+    this.form.setValue({ 'id': item.id, 'name': item.name, 'description': item.description });
   }
 
   delete(item: any) {
@@ -88,6 +103,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
 
         }, error => this.nzMessage.error("Updated Failed...!"));
       } else {
+        this.form.value.id = 0;
         this.subjectService.create(this.form.value).subscribe((data: any) => {
           console.log("Delete  - ", data);
           this.getData();

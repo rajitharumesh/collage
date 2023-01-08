@@ -57,6 +57,30 @@
           </nz-form-item>
         </div>
       </div>
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label>Course</nz-form-label>
+            <nz-form-control>
+              <nz-select formControlName="courseId">
+                <nz-option *ngFor="let course of courseList" [nzValue]="course.id"
+                  [nzLabel]="course.description"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label>Teacher</nz-form-label>
+            <nz-form-control>
+              <nz-select formControlName="teacherId">
+                <nz-option *ngFor="let teacher of teacherList" [nzValue]="teacher.id"
+                  [nzLabel]="teacher.lastName"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
     </form>
   
     <ng-template #footerTpl>

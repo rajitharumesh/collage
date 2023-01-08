@@ -9,13 +9,21 @@ import {
 
 import { environment } from './../../environments/environment';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    Authorization: 'my-auth-token'
+  })
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class SubjectService {
   apiUrl: string = environment.apiURL+"/subject";
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  // headers = new HttpHeaders().set('Content-Type', 'application/json');
 
+  
   constructor(private http: HttpClient) {}
   
   // Create
@@ -34,6 +42,13 @@ export class SubjectService {
     var API_URL = `${this.apiUrl}/${id}`;
     return this.http.delete(API_URL).pipe(catchError(this.error));
   }
+
+    // Read
+    getSubjectByCourseId(id:number) {
+      var API_URL = this.apiUrl+"/course";
+      API_URL = `${API_URL}/${id}`;
+      return this.http.get(API_URL);
+    }
   
   // Handle Errors
   error(error: HttpErrorResponse) {

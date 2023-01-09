@@ -29,11 +29,12 @@ export interface Subject {
 }
 
 export interface Student {
-  id: string;
+  id: number;
   firstName: string;
   lastName: string;
   birthDate: Date;
   registrationNo: string;
+  courseSubjectId:number;
 }
 
 export interface Teacher {
@@ -72,6 +73,18 @@ export class SharedService {
   // Read
   getTeacher() {
     return this.http.get(this.apiUrl + "/teacher");
+  }
+
+  getSubjectByCourseId(id:number) {
+    var API_URL = this.apiUrl+"/subject/course";
+    API_URL = `${API_URL}/${id}`;
+    return this.http.get(API_URL);
+  }
+
+  GetTeacherBySubjectId(id:number) {
+    var API_URL = this.apiUrl+"/teacher";
+    API_URL = `${API_URL}/${id}`;
+    return this.http.get(API_URL);
   }
 
 

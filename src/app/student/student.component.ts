@@ -7,10 +7,10 @@ import {
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { StudentService } from './student.service';
-import { SharedService, Student } from '../shared/shared.service';
+import { Course, SharedService, Student, Subject, Teacher } from '../shared/shared.service';
 
 @Component({
   selector: 'app-student',
@@ -21,18 +21,36 @@ import { SharedService, Student } from '../shared/shared.service';
 export class StudentComponent implements OnInit, OnDestroy {
   visible = false;
   drawerTitle = 'Create';
-  form !: UntypedFormGroup;
+
+
+  form = new FormGroup({
+    id: new FormControl(0),
+    lastName: new FormControl(''),
+    firstName: new FormControl(''),
+    registrationNo: new FormControl(''),
+    birthDate: new FormControl(''),
+    studentId: new FormControl(0),
+    courseId: new FormControl(0),
+    teacherId: new FormControl(0),
+    subjectId: new FormControl(0),
+    courseSubjectId: new FormControl(0),
+    grade: new FormControl(0),
+  });
 
   initLoading = true;
   loadingMore = false;
   data: any[] = [];
   list: Student[] = [];
 
+  courseList: Course[] = [];
+  subjectList: Subject[] = [];
+  teacherList: Teacher[] = [];
+
   constructor(
     private nzMessage: NzMessageService,
     private modal: NzModalService,
     private studentService: StudentService,
-    private fb: UntypedFormBuilder,private sharedService:SharedService
+    private fb: UntypedFormBuilder, private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -43,8 +61,16 @@ export class StudentComponent implements OnInit, OnDestroy {
       firstName: ["", [Validators.required]],
       birthDate: ["", [Validators.required]],
       registrationNo: ["", [Validators.required]],
+      courseId: [0],
+      teacherId: [0],
+      subjectId: [0],
+      studentId: [0],
+      courseSubjectId: [0],
+      grade: [0]
     });
-
+    this.getCourse();
+    this.getSubjectByCourseId();
+    this.GetTeacherBySubjectId();
   }
 
   ngOnDestroy(): void {
@@ -54,7 +80,12 @@ export class StudentComponent implements OnInit, OnDestroy {
     console.log(item);
     this.visible = true;
     this.drawerTitle = 'Edit';
-    this.form.setValue({ 'id': item.id, 'lastName': item.lastName, 'firstName': item.firstName, 'birthDate': item.birthDate, 'registrationNo': item.registrationNo });
+    this.form.setValue({
+      'id': item.id, 'lastName': item.lastName, 'firstName': item.firstName,
+      'birthDate': item.birthDate, 'registrationNo': item.registrationNo,
+      'subjectId': item.subjectId ?? 0, 'courseId': item.courseId ?? 0, 'teacherId': item.teacherId ?? 0,
+      'studentId': item.studentId ?? 0, 'courseSubjectId': item.courseSubjectId ?? 0, 'grade': item.grade ?? 0
+    });
   }
 
   delete(item: any) {
@@ -124,8 +155,27 @@ export class StudentComponent implements OnInit, OnDestroy {
         this.data = data;
         this.list = data;
         this.initLoading = false;
-        console.log("dddd", this.initLoading);
-        console.log("11111111111", this.list);
+      }, error => console.error(error));
+  }
+
+  getCourse(): void {
+    this.sharedService.getCourse()
+      .subscribe((data: any) => {
+        this.courseList = data;
+      }, error => console.error(error));
+  }
+
+  getSubjectByCourseId(): void {
+    this.sharedService.getSubjectByCourseId(1)
+      .subscribe((data: any) => {
+        this.subjectList = data;
+      }, error => console.error(error));
+  }
+
+  GetTeacherBySubjectId(): void {
+    this.sharedService.GetTeacherBySubjectId(9)
+      .subscribe((data: any) => {
+        this.teacherList = data;
       }, error => console.error(error));
   }
 }

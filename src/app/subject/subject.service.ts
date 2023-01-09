@@ -42,13 +42,6 @@ export class SubjectService {
     var API_URL = `${this.apiUrl}/${id}`;
     return this.http.delete(API_URL).pipe(catchError(this.error));
   }
-
-    // Read
-    getSubjectByCourseId(id:number) {
-      var API_URL = this.apiUrl+"/course";
-      API_URL = `${API_URL}/${id}`;
-      return this.http.get(API_URL);
-    }
   
   // Handle Errors
   error(error: HttpErrorResponse) {

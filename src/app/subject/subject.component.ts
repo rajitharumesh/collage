@@ -7,7 +7,7 @@ import {
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { SubjectService } from './subject.service';
 import { Course, SharedService, Subject, Teacher } from '../shared/shared.service';
@@ -21,7 +21,16 @@ import { Course, SharedService, Subject, Teacher } from '../shared/shared.servic
 export class SubjectComponent implements OnInit, OnDestroy {
   visible = false;
   drawerTitle = 'Create';
-  form !: UntypedFormGroup;
+  // form !: UntypedFormGroup;
+
+  form = new FormGroup({
+    id: new FormControl(0),
+    name: new FormControl(''),
+    description: new FormControl(''),
+    courseId: new FormControl(0),
+    teacherId: new FormControl(0),
+    subjectId: new FormControl(0),
+  });
 
   initLoading = true;
   loadingMore = false;
@@ -44,8 +53,9 @@ export class SubjectComponent implements OnInit, OnDestroy {
       id: [null],
       name: ["", [Validators.required]],
       description: ["", [Validators.required]],
-      courseId: [0, [Validators.required]],
-      teacherId: [0, [Validators.required]],
+      courseId: [0],
+      teacherId: [0],
+      subjectId: [0],
     });
     this.sharedService.getCourse()
       .subscribe((data: any) => {
@@ -67,11 +77,12 @@ export class SubjectComponent implements OnInit, OnDestroy {
     console.log(item);
     this.visible = true;
     this.drawerTitle = 'Edit';
-    this.form.setValue({ 'id': item.id, 'name': item.name, 'description': item.description,
-    'courseId':item.courseId,'subjectId':item.subjectId,'teacherId':item.teacherId//,
-    // 'courseDescription':item.courseDescription,'teacherName':item.teacherName,'courseTitle':item.courseTitle 
-  
-  });
+    this.form.setValue({
+      'id': item.id, 'name': item.name, 'description': item.description,
+      'courseId': item.courseId ?? 0, 'subjectId': item.subjectId ?? 0, 'teacherId': item.teacherId ?? 0//,
+      // 'courseDescription':item.courseDescription,'teacherName':item.teacherName,'courseTitle':item.courseTitle 
+
+    });
   }
 
   delete(item: any) {

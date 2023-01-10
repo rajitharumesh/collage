@@ -17,15 +17,28 @@ export class StudentService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) {}
 
+  getAllStudent() {
+    return this.http.get(this.apiUrl + "/details");
+  }
+
   // Create
   create(data: any): Observable<any> {
     return this.http.post(this.apiUrl, data).pipe(catchError(this.error));
+  }
+
+  createMapping(data: any): Observable<any> {
+    return this.http.post(this.apiUrl+"/mapping", data).pipe(catchError(this.error));
   }
   
   // Update
   update(data: any): Observable<any> {
     return this.http.put(this.apiUrl, data).pipe(catchError(this.error));
   }
+
+    // Update
+    updateMapping(data: any): Observable<any> {
+      return this.http.put(this.apiUrl+"/mapping", data).pipe(catchError(this.error));
+    }
 
   // Delete
   delete(id: any): Observable<any> {

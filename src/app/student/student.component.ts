@@ -83,8 +83,8 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.form.setValue({
       'id': item.id, 'lastName': item.lastName, 'firstName': item.firstName,
       'birthDate': item.birthDate, 'registrationNo': item.registrationNo,
-      'subjectId': item.subjectId ?? 0, 'courseId': item.courseId ?? 0, 'teacherId': item.teacherId ?? 0,
-      'studentId': item.studentId ?? 0, 'courseSubjectId': item.courseSubjectId ?? 0, 'grade': item.grade ?? 0
+      'subjectId': item.subjectID ?? 0, 'courseId': item.courseID ?? 0, 'teacherId': item.teacherID ?? 0,
+      'studentId': item.studentID ?? 0, 'courseSubjectId': item.courseSubjectID ?? 0, 'grade': item.grade ?? 0
     });
   }
 

@@ -35,6 +35,7 @@ export interface Student {
   birthDate: Date;
   registrationNo: string;
   courseSubjectId:number;
+  name: string;
 }
 
 export interface Teacher {

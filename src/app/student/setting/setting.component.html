@@ -1,67 +1,97 @@
 <p>setting works!</p>
-<form nz-form [formGroup]="form">
-  <div nz-row [nzGutter]="8">
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label>Course</nz-form-label>
-        <nz-form-control>
-          <nz-select [(ngModel)]="selectedCourse" formControlName="course">
-            <nz-option *ngFor="let course of courseList" [nzValue]="course.title"
-              [nzLabel]="course.description"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label>Subject</nz-form-label>
-        <nz-form-control>
-          <nz-select [(ngModel)]="selectedSubject" formControlName="subject">
-            <nz-option *ngFor="let subject of subjectList" [nzValue]="subject.description"
-              [nzLabel]="subject.name"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="8">
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label>Teacher</nz-form-label>
-        <nz-form-control>
-          <nz-select [(ngModel)]="selectedTeacher" formControlName="teacher">
-            <nz-option *ngFor="let teacher of teacherList" [nzValue]="teacher.firstName"
-              [nzLabel]="teacher.lastName"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label>Student</nz-form-label>
-        <nz-form-control>
-          <nz-select [(ngModel)]="selectedStudent" formControlName="student">
-            <nz-option *ngFor="let student of studentList" [nzValue]="student.firstName"
-              [nzLabel]="student.lastName"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
 
-  <div nz-row [nzGutter]="8">
-    <div nz-col nzSpan="12">
-
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label></nz-form-label>
-        <nz-form-control>
-          <div class="card-container" style="text-align: right;">
-            <button nz-button nzType="primary" (click)="save()">Create</button>
-          </div>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
+<div>
+  <div class="card-container">
+    <button nz-button nzType="primary" (click)="open()">Create</button>
   </div>
-</form>
+  <div class="card-container">
+    <nz-table #basicTable [nzData]="list" [nzLoading]="initLoading">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Birth Date</th>
+          <th>Registration No</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{data.id}}</td>
+          <td>{{data.name}}</td>
+          <td>{{data.birthDate}}</td>
+          <td>{{data.registrationNo}}</td>
+          <td>
+            <a (click)="edit(data)">Edit</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a (click)="showConfirm(data)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+<!--Create/Edit Drawer-->
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible"
+  [nzTitle]="drawerTitle" [nzFooter]="footerTpl" (nzOnClose)="close()" >
+
+  <form nz-form [formGroup]="form" *nzDrawerContent>
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Course</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="courseId">
+              <nz-option *ngFor="let course of courseList" [nzValue]="course.id"
+                [nzLabel]="course.description"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Teacher</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="subjectId">
+              <nz-option *ngFor="let subject of subjectList" [nzValue]="subject.id"
+                [nzLabel]="subject.name"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Teacher</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="teacherId">
+              <nz-option *ngFor="let teacher of teacherList" [nzValue]="teacher.id"
+                [nzLabel]="teacher.firstName"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Student</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="studentId">
+              <nz-option *ngFor="let student of studentList" [nzValue]="student.id"
+                [nzLabel]="student.firstName"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>
+  <ng-template #footerTpl>
+    <div style="float: right">
+      <button nz-button style="margin-right: 8px" (click)="close()">
+        Cancel
+      </button>
+      <button nz-button nzType="primary" (click)="submitForm()">Submit</button>
+    </div>
+  </ng-template>
+</nz-drawer>

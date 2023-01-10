@@ -79,10 +79,9 @@ export class SubjectComponent implements OnInit, OnDestroy {
     this.drawerTitle = 'Edit';
     this.form.setValue({
       'id': item.id, 'name': item.name, 'description': item.description,
-      'courseId': item.courseId ?? 0, 'subjectId': item.subjectId ?? 0, 'teacherId': item.teacherId ?? 0//,
-      // 'courseDescription':item.courseDescription,'teacherName':item.teacherName,'courseTitle':item.courseTitle 
-
+      'courseId': item.courseID ?? 0, 'subjectId': item.subjectID ?? 0, 'teacherId': item.teacherID ?? 0//,
     });
+
   }
 
   delete(item: any) {

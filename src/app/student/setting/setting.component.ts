@@ -46,6 +46,7 @@ export class SettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
+      id:["0"],
       studentId: ["", [Validators.required]],
       courseId: ["", [Validators.required]],
       teacherId: ["", [Validators.required]],
@@ -83,12 +84,11 @@ export class SettingComponent implements OnInit {
     console.log(item);
     this.visible = true;
     this.drawerTitle = 'Edit';
-    // this.form.setValue({
-    //   'id': item.id, 'firstName': item.firstName,
-    //   'birthDate': item.birthDate, 'registrationNo': item.registrationNo,
-    //   'subjectId': item.subjectID ?? 0, 'courseId': item.courseID ?? 0, 'teacherId': item.teacherID ?? 0,
-    //   'studentId': item.studentID ?? 0, 'courseSubjectId': item.courseSubjectID ?? 0, 'grade': item.grade ?? 0
-    // });
+    this.form.setValue({
+      'id': item.id,
+      'subjectId': item.subjectID ?? 0, 'courseId': item.courseID ?? 0, 'teacherId': item.teacherID ?? 0,
+      'studentId': item.id ?? 0, 'courseSubjectId': item.courseSubjectID ?? 0, 'grade': item.grade ?? 0
+    });
   }
 
   delete(item: any) {

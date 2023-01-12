@@ -1,5 +1,3 @@
-<p>setting works!</p>
-
 <div>
   <div class="card-container">
     <button nz-button nzType="primary" (click)="open()">Create</button>
@@ -12,6 +10,9 @@
           <th>Name</th>
           <th>Birth Date</th>
           <th>Registration No</th>
+          <th>Course Title</th>
+          <th>Subject Name</th>
+          <th>Teacher Name</th>
           <th></th>
         </tr>
       </thead>
@@ -21,6 +22,9 @@
           <td>{{data.name}}</td>
           <td>{{data.birthDate}}</td>
           <td>{{data.registrationNo}}</td>
+          <td>{{data.courseTitle}}</td>
+          <td>{{data.subjectName}}</td>
+          <td>{{data.teacherName}}</td>
           <td>
             <a (click)="edit(data)">Edit</a>
             <nz-divider nzType="vertical"></nz-divider>

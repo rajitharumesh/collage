@@ -20,12 +20,12 @@ export interface Subject {
   id: string;
   name: string;
   description: string;
-  courseId:string;
-  subjectId:string;
-  teacherId:string;
-  courseDescription:string;
-  teacherName:string,
-  courseTitle:string;
+  courseId: string;
+  subjectId: string;
+  teacherId: string;
+  courseDescription: string;
+  teacherName: string,
+  courseTitle: string;
 }
 
 export interface Student {
@@ -34,15 +34,18 @@ export interface Student {
   lastName: string;
   birthDate: Date;
   registrationNo: string;
-  courseSubjectId:number;
+  courseSubjectID: number;
   name: string;
+  courseTitle: string;
+  subjectName: string;
+  teacherName: string;
 }
 
 export interface Teacher {
   id: string;
   firstName: string;
   lastName: string;
-  birthDate:Date,
+  birthDate: Date,
   salary: number;
 }
 
@@ -58,7 +61,7 @@ export class SharedService {
 
   // Read
   getSubject() {
-    return this.http.get(this.apiUrl+ "/subject");
+    return this.http.get(this.apiUrl + "/subject");
   }
 
   // Read
@@ -76,14 +79,14 @@ export class SharedService {
     return this.http.get(this.apiUrl + "/teacher");
   }
 
-  getSubjectByCourseId(id:number) {
-    var API_URL = this.apiUrl+"/subject/course";
+  getSubjectByCourseId(id: number) {
+    var API_URL = this.apiUrl + "/subject/course";
     API_URL = `${API_URL}/${id}`;
     return this.http.get(API_URL);
   }
 
-  GetTeacherBySubjectId(id:number) {
-    var API_URL = this.apiUrl+"/teacher";
+  GetTeacherBySubjectId(id: number) {
+    var API_URL = this.apiUrl + "/teacher";
     API_URL = `${API_URL}/${id}`;
     return this.http.get(API_URL);
   }
